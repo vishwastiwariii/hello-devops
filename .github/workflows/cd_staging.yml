@@ -11,8 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     name: Deploying everything to the staging cluster
     steps: 
-       - name: SSH Into Server
-       - run: |
+       name: SSH Into Server
+       run: |
             echo ${{ secrets.SSH_PRIVATE_KEY }} &> ~/ssh_key
             ssh -i ~/ssh_key ubuntu@3.110.212.91
             cd hello-devops && git pull
