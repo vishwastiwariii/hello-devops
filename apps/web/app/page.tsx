@@ -6,9 +6,9 @@ export default async function Home() {
   const user = await client.users.findFirst()
 
   return (
-    <div> 
-      {user?.name},
-      {user?.password}
+    <div>  
+      name: {user?.name},
+      password: {user?.password} 
     </div>
   )
 }
