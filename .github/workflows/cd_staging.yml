@@ -18,6 +18,7 @@ jobs:
       
       - run: |
           ssh -o StrictHostKeyChecking=no ubuntu@3.110.212.91 bash -l << 'EOF'
+          source ~/.nvm/nvm.sh
           cd hello-devops && git pull
           pnpm install
           pnpm run build
