@@ -3,21 +3,25 @@ name: Deploy to staging (main)
 on:
   push: 
     branches:
-        - "main"
-
+      - "main"
 
 jobs:
   redeploy_everything: 
     runs-on: ubuntu-latest
     name: Deploying everything to the staging cluster
-    steps: 
+    steps:
+      - uses: actions/checkout@v4
+      
+      - uses: webfactory/ssh-agent@v0.8.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+      
       - run: |
-            echo ${{ secrets.SSH_PRIVATE_KEY }} &> ~/ssh_key
-            ssh -i ~/ssh_key ubuntu@3.110.212.91
-            cd hello-devops && git pull
-            pnpm install
-            pnpm run build
-            pm2 restart http-server
-            pm2 restart ws-server
-            pm2 restart fe-server
-
+          ssh -o StrictHostKeyChecking=no ubuntu@3.110.212.91 << 'EOF'
+          cd hello-devops && git pull
+          pnpm install
+          pnpm run build
+          pm2 restart http-server
+          pm2 restart ws-server
+          pm2 restart fe-server
+          EOF
