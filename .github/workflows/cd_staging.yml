@@ -17,7 +17,7 @@ jobs:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
       
       - run: |
-          ssh -o StrictHostKeyChecking=no ubuntu@3.110.212.91 << 'EOF'
+          ssh -o StrictHostKeyChecking=no ubuntu@3.110.212.91 bash -l << 'EOF'
           cd hello-devops && git pull
           pnpm install
           pnpm run build
