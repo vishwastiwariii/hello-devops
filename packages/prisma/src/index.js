@@ -1,6 +1,6 @@
 import { Pool } from "pg";
 import { PrismaPg } from "@prisma/adapter-pg";
-import { PrismaClient } from "../generated/prisma/index.js";
+import { PrismaClient } from "../generated/prisma/client.js";
 import { configDotenv } from "dotenv";
 import { fileURLToPath } from "url";
 import path from "path";
